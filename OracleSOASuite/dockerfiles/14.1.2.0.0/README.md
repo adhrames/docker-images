@@ -8,10 +8,7 @@ At the end of this configuration there will be at least two running containers:
 2. Oracle WebLogic Server Administration Server container
 3. Two Oracle WebLogic Server Managed Server containers (Oracle SOA Server or Oracle Service Bus Server)
 
-This documentation provides the steps for the two scenarios to start the containers on the node(s).
-
-- **Single node scenario**: all the containers created on single node.
-
+This documentation provides the steps for Single node scenario where all the containers created on a single node.
 
 To create the Podman network and run containers, follow these steps:
 
@@ -27,7 +24,6 @@ To create the Podman network and run containers, follow these steps:
 
 ### 1. Create a network
 
-#### Single node scenario
 The containers will be connected using a Podman user-defined network.
 
 ##### Create a user-defined network
@@ -92,7 +88,7 @@ To run the database container to host the RCU schemas:
 
 ### 4. Obtain the SOA 14.1.2.0 container image
 
-You can either build the SOA image with the `Containerfile` provided or use the already available Oracle SOA Suite (14.1.2.0) image in the [Oracle Container Registry](https://container-registry.oracle.com).
+You can either build the SOA image with the `Containerfile` provided or use the already available Oracle SOA Suite (14.1.2.0) image in the [Oracle Container Registry](https://container-registry.oracle.com/ords/ocr/ba/middleware/soasuite).
 
 ### 5. Create a container for the Administration Server
 
@@ -137,7 +133,7 @@ To start a Podman container with a SOA domain and the WebLogic Server Administra
 
 For example:
 ``` bash
-$ podman run -it --name soaas --network=SOANet -p 7001:7001 -v soadomain_vol:/u01/oracle/user_projects --env-file ./adminserver.env.list container-registry.oracle.com/middleware/soasuite::14.1.2.0-17-ol8
+$ podman run -it --name soaas --network=SOANet -p 7001:7001 -v soadomain_vol:/u01/oracle/user_projects --env-file ./adminserver.env.list container-registry.oracle.com/middleware/soasuite:14.1.2.0-17-ol8-241205
 ```
 The options `-it` in the above command runs the container in interactive mode and you will be able to see the commands running in the container. This includes the command for RCU creation, domain creation, and configuration, followed by starting the Administration Server.
 
@@ -200,13 +196,13 @@ To start a Podman container for the SOA server (for `soa_server1`), you can use 
 
 For example:
 ``` bash
-$ podman run -it --name soams1 --network=SOANet -p 7003:7003  -v soadomain_vol:/u01/oracle/user_projects --env-file ./soaserver1.env.list container-registry.oracle.com/middleware/soasuite::14.1.2.0-17-ol8 "/u01/oracle/container-scripts/startMS.sh"
+$ podman run -it --name soams1 --network=SOANet -p 7003:7003  -v soadomain_vol:/u01/oracle/user_projects --env-file ./soaserver1.env.list container-registry.oracle.com/middleware/soasuite:14.1.2.0-17-ol8-241205 "/u01/oracle/container-scripts/startMS.sh"
 ```
 Similarly, to start a second Podman container for the SOA server (for `soa_server2`), you can use the `podman run` command passing `soaserver2.env.list` with port `7005`.
 
 For example:
 ``` bash
-$ podman run -it --name soams2 --network=SOANet -p 7005:7005 -v soadomain_vol:/u01/oracle/user_projects --env-file ./soaserver2.env.list  container-registry.oracle.com/middleware/soasuite::14.1.2.0-17-ol8 "/u01/oracle/container-scripts/startMS.sh"
+$ podman run -it --name soams2 --network=SOANet -p 7005:7005 -v soadomain_vol:/u01/oracle/user_projects --env-file ./soaserver2.env.list  container-registry.oracle.com/middleware/soasuite:14.1.2.0-17-ol8-241205 "/u01/oracle/container-scripts/startMS.sh"
 ```
 
 > **Note**: Using `-v` reuses the volume created by the Administration Server container.
@@ -269,13 +265,13 @@ To start a Podman container for the Oracle Service Bus server (for `osb_server1`
 
 For example:
 ``` bash
-$ podman run -it --name osbms1 --network=SOANet -p 8002:8002 -v soadomain_vol:/u01/oracle/user_projects --env-file ./osbserver1.env.list container-registry.oracle.com/middleware/soasuite::14.1.2.0-17-ol8 "/u01/oracle/container-scripts/startMS.sh"
+$ podman run -it --name osbms1 --network=SOANet -p 8002:8002 -v soadomain_vol:/u01/oracle/user_projects --env-file ./osbserver1.env.list container-registry.oracle.com/middleware/soasuite:14.1.2.0-17-ol8-241205 "/u01/oracle/container-scripts/startMS.sh"
 ```
 Similarly, to start a second Podman container for the Oracle Service Bus server (for `osb_server2`), you can use the `podman run` command passing `osbserver2.env.list`.
 
 For example:
 ``` bash
-$ podman run -it --name osbms1 --network=SOANet -p 8004:8004 -v soadomain_vol:/u01/oracle/user_projects --env-file ./osbserver2.env.list container-registry.oracle.com/middleware/soasuite::14.1.2.0-17-ol8 "/u01/oracle/container-scripts/startMS.sh"
+$ podman run -it --name osbms1 --network=SOANet -p 8004:8004 -v soadomain_vol:/u01/oracle/user_projects --env-file ./osbserver2.env.list container-registry.oracle.com/middleware/soasuite:14.1.2.0-17-ol8-241205 "/u01/oracle/container-scripts/startMS.sh"
 ```
 The following lines indicate when the Oracle Service Bus Managed Server is ready to be used: 
 ``` bash   

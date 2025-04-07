@@ -22,7 +22,7 @@ Parameters:
    -p: Uses podman CLI to build the image. Option enabled only for 14.1.2.0.0
 
 LICENSE Universal Permissive License (UPL), Version 1.0
-Copyright (c) 2016-2024: Oracle and/or its affiliates.
+Copyright (c) 2016-2025: Oracle and/or its affiliates.
 
 EOF
 exit $1

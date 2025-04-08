@@ -119,7 +119,7 @@ LABEL "provider"="Oracle"
 # Install the required packages
 # -----------------------------
 USER root
-ENV PATH=$PATH:/u01/oracle/container-scripts:/u01/oracle/oracle_common/modules/thirdparty/org.apache.ant/1.10.5.0.0/apache-ant-1.10.5/bin
+ENV PATH=$PATH:/u01/oracle/container-scripts:/u01/oracle/oracle_common/modules/thirdparty/org.apache.ant/apache-ant/bin
 RUN microdnf install hostname && \
     microdnf clean all
 

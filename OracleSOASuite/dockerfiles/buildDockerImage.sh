@@ -19,7 +19,7 @@ Parameters:
    -h: view usage
    -v: Release version to build. Required.
    -s: Skip checksum verification
-   -p: Uses podman CLI to build the image. Option enabled only for 14.1.2.0.0
+   -p: Uses podman CLI to build the image. Option enabled only for 14.1.2.0
 
 LICENSE Universal Permissive License (UPL), Version 1.0
 Copyright (c) 2016-2025: Oracle and/or its affiliates.
@@ -88,7 +88,7 @@ while getopts "hsv:p" optname; do
       VERSION="$OPTARG"
       ;;
     "p")
-      if [ "${VERSION}" != "14.1.2.0.0" ]; then
+      if [ "${VERSION}" != "14.1.2.0" ]; then
         usage
       fi
 
@@ -112,7 +112,7 @@ fi
 
 IMAGE_NAME="oracle/soasuite:$VERSION"
 
-if [ "${VERSION}" = "14.1.2.0.0" ]; then
+if [ "${VERSION}" = "14.1.2.0" ]; then
   CONTAINERFILE_NAME=Containerfile
 else
   CONTAINERFILE_NAME=Dockerfile
@@ -150,12 +150,6 @@ fi
 # ################## #
 
 buildCmd="${BUILD_CLI:-docker} build $BUILD_OPTS --force-rm=true $PROXY_SETTINGS -t $IMAGE_NAME -f $CONTAINERFILE_NAME ."
-
-# if [ ${VERSION} = "14.1.2.0.0" ]; then
-#   buildCmd="podman build --format docker --rm --no-cache $BUILD_OPTS $PROXY_SETTINGS -t $IMAGE_NAME -f $CONTAINERFILE_NAME ."
-# else
-#   buildCmd="docker build $BUILD_OPTS --force-rm=true $PROXY_SETTINGS -t $IMAGE_NAME -f $CONTAINERFILE_NAME ."
-# fi
 
 cat > /dev/stdout <<EOF
 

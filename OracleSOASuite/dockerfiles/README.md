@@ -104,24 +104,24 @@ To build the SOA image with patches, you need to download and drop the patch zip
 Build the Oracle SOA 14.1.2.0 image using:
 
 ```
-$ sh buildDockerImage.sh -v 14.1.2.0.0
+$ sh buildDockerImage.sh -v 14.1.2.0
 
    Usage: buildDockerImage.sh -v [version]
    Parameters:
       -h: view usage
       -v: Release version to build. Required.
       -s: Skip checksum verification
-      -p: Uses podman CLI to build the image. Option enabled only for 14.1.2.0.0
+      -p: Uses podman CLI to build the image. Option enabled only for 14.1.2.0
 ```
 
 For the podman users:
 ```
-$ sh buildDockerImage.sh -v 14.1.2.0.0 -p
+$ sh buildDockerImage.sh -v 14.1.2.0 -p
 ```
 
 >Note: -p ensures podman CLI is used for the image build.
 
-Verify you now have the image `oracle/soasuite:14.1.2.0.0` in place with 
+Verify you now have the image `oracle/soasuite:14.1.2.0` in place with 
 
 ```
 $ docker images | grep "soa"
@@ -134,11 +134,11 @@ $ podman images | grep "soa"
 If you are building the SOA image with patches, you can verify the patches applied with:
 
 ```
-$ docker run oracle/soasuite:14.1.2.0.0 sh -c '$ORACLE_HOME/OPatch/opatch lspatches'
+$ docker run oracle/soasuite:14.1.2.0 sh -c '$ORACLE_HOME/OPatch/opatch lspatches'
 ```
 
 ```
-$ podman run oracle/soasuite:14.1.2.0.0 sh -c '$ORACLE_HOME/OPatch/opatch lspatches'
+$ podman run oracle/soasuite:14.1.2.0 sh -c '$ORACLE_HOME/OPatch/opatch lspatches'
 ```
 
 >IMPORTANT: The image created in above step will NOT have a domain pre-configured. But it has the scripts to create and configure a SOA domain.
